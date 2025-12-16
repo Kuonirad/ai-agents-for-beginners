@@ -1,0 +1,54 @@
+name: CI - Tests and Artifacts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run demo plugin tests
+        id: run-tests
+        continue-on-error: true  # Capture output even if tests fail
+        run: |
+          python 04-tool-use/code_samples/test_demo_plugins.py | tee test-output.log
+
+      - name: Upload test output log
+        uses: actions/upload-artifact@v6.0.0
+        if: always()
+        with:
+          name: test-output-log
+          path: test-output.log
+          if-no-files-found: ignore
+          retention-days: 7
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
+
+      - name: Upload Study Guide Artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: course-study-guide
+          path: STUDY_GUIDE.md
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 6
+          overwrite: true
+          include-hidden-files: false
