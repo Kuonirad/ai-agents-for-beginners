@@ -70,6 +70,7 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Maker-Checker Loop:** Iterative process where the agent retrieves info, evaluates it, and potentially refines the query or retrieves more info.
 - **Owning the Reasoning:** The agent autonomously decides the steps (retrieve -> plan -> critique -> refine) rather than following a fixed script.
 - **Self-Correction:** The agent can identify if retrieved data is insufficient or incorrect and try a different strategy.
+- **Boundaries:** Agents operate within domain-specific boundaries and depend on provided infrastructure; they are not AGI.
 
 ## 6. Building Trustworthy Agents
 **Goal:** Ensure agents are safe, secure, and reliable.
@@ -90,7 +91,7 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 
 **Key Concepts:**
 - **Task Decomposition:** Breaking a high-level goal (e.g., "Plan a trip") into subtasks (Flights, Hotels, Activities).
-- **Structured Output:** Using JSON or specific formats for reliable downstream processing.
+- **Structured Output:** Using JSON or specific formats (like Pydantic models) for reliable downstream processing.
 - **Iterative Planning:** Re-evaluating and adjusting the plan based on new information or feedback (e.g., flight unavailable).
 
 ## 8. Multi-Agent Design Pattern
@@ -111,7 +112,7 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 
 **Key Concepts:**
 - **Self-Reflection:** Analyzing past actions to identify errors or areas for improvement.
-- **Adaptability:** adjusting strategies based on context.
+- **Adaptability:** Adjusting strategies based on context.
 - **Corrective RAG:** Using metacognition to evaluate the relevance of retrieved documents.
 - **Implementation:** Prompting the agent to "reflect" on its last decision before finalizing it.
 
@@ -170,16 +171,23 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 
 **Features:**
 - Builds on learnings from Semantic Kernel and AutoGen.
-- **Workflows:** Graph-based execution (Executors, Edges).
-- **Middleware:** Intercepting chat/function calls for logging or modification.
+- **Workflows:** Graph-based execution (Executors, Edges) for complex orchestration.
+- **Middleware:** Intercepting chat/function calls for logging (observability) or modification.
 - **Interoperability:** Supports A2A and MCP.
-- **Enterprise Ready:** Observability, Security, Durability (pause/resume).
+- **Enterprise Ready:** Built-in Observability (OpenTelemetry), Security, and Durability (pause/resume).
 
 ## 15. Browser Use
-**Goal:** enabling agents to interact with web browsers.
+**Goal:** Enabling agents to autonomously interact with web browsers to perform tasks like searching, data extraction, and navigation.
 
-**Library:** `browser-use`
-- Allows agents to control a browser (via Playwright) to perform tasks on websites.
-- **Capabilities:** Navigation, clicking, typing, extracting content.
-- **Vision:** Can use vision models to understand page layout.
-- **Cloud/Remote:** Support for remote browser sessions.
+**Key Technologies:**
+- **Browser-Use:** A library that wraps Playwright to provide an agentic interface for browser automation.
+- **Playwright:** A framework for web testing and automation that controls the browser (Chromium, Firefox, WebKit).
+- **LLM with Vision (e.g., GPT-4o):** Essential for "seeing" the page content and making decisions based on visual layout, not just HTML structure.
+
+**Key Concepts:**
+- **Agent vs. Actor Pattern:**
+  - **Agent:** Autonomous navigation based on high-level goals (e.g., "Find the cheapest hotel"). Good for dynamic or unknown layouts.
+  - **Actor:** Precise, scripted actions using selectors (e.g., "Click button #submit"). Good for known, stable structures.
+- **Vision-Based Extraction:** Using the LLM to analyze screenshots of the page to extract structured data (e.g., prices, ratings) without relying on brittle CSS selectors.
+- **Structured Output:** Converting unstructured web content into typed objects (e.g., Pydantic models) for reliable downstream processing.
+- **CDP (Chrome DevTools Protocol):** A low-level protocol used to connect Playwright and Browser-Use to the same browser instance, enabling advanced debugging and persistent sessions.
