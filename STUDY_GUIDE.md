@@ -38,7 +38,7 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 **Goal:** Explore the tools available for building agents.
 
 **Key Frameworks:**
-- **Semantic Kernel:** Production-ready SDK (C#/Python) for integrating LLMs with code. Good for enterprise applications.
+- **Semantic Kernel:** Production-ready SDK (C#/Python) for integrating LLMs with existing code. Good for enterprise applications.
 - **AutoGen:** Framework for multi-agent conversation and orchestration. Excellent for research and complex, distributed agent patterns.
 - **Azure AI Agent Service:** Managed cloud service for deploying secure, scalable agents.
 
@@ -176,6 +176,15 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Interoperability:** Supports A2A and MCP.
 - **Enterprise Ready:** Built-in Observability (OpenTelemetry), Security, and Durability (pause/resume).
 
+**Workflow Components:**
+- **Executors:** Components that process messages (Agents or Code).
+- **Edges:** Define flow control:
+  - **Direct:** Simple 1-to-1 connection.
+  - **Conditional:** If/Else logic.
+  - **Switch-case:** Routing based on multiple conditions.
+  - **Fan-out:** Sending to multiple executors.
+  - **Fan-in:** Collecting from multiple executors.
+
 ## 15. Browser Use
 **Goal:** Enabling agents to autonomously interact with web browsers to perform tasks like searching, data extraction, and navigation.
 
@@ -189,5 +198,9 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
   - **Agent:** Autonomous navigation based on high-level goals (e.g., "Find the cheapest hotel"). Good for dynamic or unknown layouts.
   - **Actor:** Precise, scripted actions using selectors (e.g., "Click button #submit"). Good for known, stable structures.
 - **Vision-Based Extraction:** Using the LLM to analyze screenshots of the page to extract structured data (e.g., prices, ratings) without relying on brittle CSS selectors.
+- **Security & Privacy:**
+  - **Domain Restriction:** Limiting navigation to trusted sites.
+  - **Sensitive Data Filtering:** Using placeholders (e.g., `x_password`) to prevent sending secrets to the LLM.
+  - **Vision Control:** Disabling vision to prevent leaking PII visible in screenshots.
 - **Structured Output:** Converting unstructured web content into typed objects (e.g., Pydantic models) for reliable downstream processing.
 - **CDP (Chrome DevTools Protocol):** A low-level protocol used to connect Playwright and Browser-Use to the same browser instance, enabling advanced debugging and persistent sessions.
