@@ -29,9 +29,11 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Agent Loop:** Perceive (Sensors) -> Reason (Brain/LLM) -> Act (Actuators/Tools) -> Environment.
 - **Types of Agents:**
   - **Simple Reflex:** Action based on immediate perception.
+  - **Model-Based Reflex:** Action based on a model of the world and changes to it.
   - **Goal-Based:** Planning to achieve a specific goal.
   - **Utility-Based:** Maximizing a utility function (trade-offs).
   - **Learning Agents:** Improving performance over time.
+  - **Hierarchical Agents:** Multi-tiered system with higher-level agents managing subtasks.
   - **Multi-Agent Systems:** Collaboration between multiple agents.
 
 ## 2. Agentic Frameworks
@@ -171,7 +173,9 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 
 **Features:**
 - Builds on learnings from Semantic Kernel and AutoGen.
-- **Workflows:** Graph-based execution (Executors, Edges) for complex orchestration.
+- **Workflows:** Graph-based execution using **Executors** (agents/code) and **Edges** (flow control) for complex orchestration.
+  - **Edge Types:** Direct, Conditional, Switch-case, Fan-out, Fan-in.
+- **Events:** Built-in events (e.g., `WorkflowStartedEvent`, `ExecutorInvokeEvent`) for granular observability.
 - **Middleware:** Intercepting chat/function calls for logging (observability) or modification.
 - **Interoperability:** Supports A2A and MCP.
 - **Enterprise Ready:** Built-in Observability (OpenTelemetry), Security, and Durability (pause/resume).
