@@ -139,7 +139,12 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
   - **Client:** Connects to servers.
   - **Server:** Exposes Tools, Resources, and Prompts.
 - **A2A (Agent-to-Agent):** Protocol for communication between different agents across boundaries.
-- **NLWeb (Natural Language Web):** Exposing website functionality via natural language interfaces (embedding-based discovery).
+  - **Agent Card:** Describes the agent's identity, capabilities, and tools.
+  - **Agent Executor:** Passes user context to the remote agent.
+  - **Event Queue:** Handles message passing and updates to prevent connection closure.
+- **NLWeb (Natural Language Web):** Exposing website functionality via natural language interfaces.
+  - **Embeddings & Vector DB:** Converts website content into vectors for semantic search.
+  - **NLWeb Protocol:** Standard rules for natural language interaction (JSON/Schema.org).
 
 ## 12. Context Engineering
 **Goal:** Managing the limited context window effectively.
@@ -175,6 +180,10 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Middleware:** Intercepting chat/function calls for logging (observability) or modification.
 - **Interoperability:** Supports A2A and MCP.
 - **Enterprise Ready:** Built-in Observability (OpenTelemetry), Security, and Durability (pause/resume).
+
+**Comparison:**
+- **VS Semantic Kernel:** MAF simplifies agent creation (no Kernel instance required) and automates tool registration.
+- **VS AutoGen:** MAF uses **Workflows** (Graph-based) instead of **Teams** (Event-based) for more controlled orchestration.
 
 ## 15. Browser Use
 **Goal:** Enabling agents to autonomously interact with web browsers to perform tasks like searching, data extraction, and navigation.
