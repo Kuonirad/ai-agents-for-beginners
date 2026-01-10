@@ -18,6 +18,11 @@ semantic-kernel
 semantic-kernel[azure]
 semantic-kernel[mcp]
 
+# Browser Automation
+browser-use
+langchain-openai
+playwright
+
 # Model Context Protocol
 mcp[cli]
 
