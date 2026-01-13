@@ -150,7 +150,13 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Scratchpad:** Temporary storage for intermediate reasoning.
 - **Memory/Recall:** Retrieving relevant past info.
 - **Compression:** Summarizing history to save tokens.
-- **Pruning:** Removing irrelevant or conflicting info to avoid "Context Confusion" or "Context Poisoning".
+- **Pruning:** Removing irrelevant or conflicting info.
+
+**Common Context Failures:**
+- **Context Poisoning:** False information (hallucinations) entering the context and being referenced repeatedly.
+- **Context Distraction:** Model focuses on irrelevant history instead of the current task.
+- **Context Confusion:** Too many tools or options cause the model to make bad decisions.
+- **Context Clash:** Conflicting information (e.g., changing preferences) leads to inconsistent reasoning.
 
 ## 13. Agent Memory
 **Goal:** Making agents stateful and capable of learning.
@@ -158,7 +164,8 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 **Types:**
 - **Short-Term/Working:** Current conversation context.
 - **Long-Term:** Persistent across sessions (User preferences, Facts).
-- **Episodic:** Remembering past sequences of actions.
+- **Episodic/Workflow:** Remembering past sequences of actions and their outcomes.
+- **Entity:** Extracting and remembering specific entities (People, Places, Events).
 - **Persona:** Consistent personality.
 
 **Implementations:**
