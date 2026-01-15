@@ -147,10 +147,20 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 **VS Prompt Engineering:** Context engineering manages the dynamic flow of information (history, retrieved data), not just the static instruction.
 
 **Strategies:**
-- **Scratchpad:** Temporary storage for intermediate reasoning.
-- **Memory/Recall:** Retrieving relevant past info.
-- **Compression:** Summarizing history to save tokens.
-- **Pruning:** Removing irrelevant or conflicting info to avoid "Context Confusion" or "Context Poisoning".
+- **Scratchpad:** Temporary storage for intermediate reasoning, kept outside the main context window.
+- **Memory/Recall:** Retrieving relevant past info (Long-term memory).
+- **Compression/Summarization:** Condensing conversation history to save tokens while retaining key details.
+- **Pruning:** Removing irrelevant or conflicting info to avoid failures.
+
+**Common Context Failures:**
+- **Context Poisoning:** Hallucinations or errors entering the context and being treated as truth.
+  - *Mitigation:* Context Validation (check facts before adding), Quarantine (isolate suspect info).
+- **Context Distraction:** The model focuses on irrelevant history instead of the current task.
+  - *Mitigation:* Summarization and resetting context focus.
+- **Context Confusion:** Too many tools or options overwhelm the model.
+  - *Mitigation:* Tool Loadout Management (RAG for tools) to only show relevant tools.
+- **Context Clash:** Conflicting information exists in the context (e.g., changing preferences).
+  - *Mitigation:* Pruning outdated info and using a Scratchpad to reconcile conflicts.
 
 ## 13. Agent Memory
 **Goal:** Making agents stateful and capable of learning.

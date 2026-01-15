@@ -23,6 +23,11 @@ mcp[cli]
 
 # OpenAI
 openai
+langchain-openai
+
+# Browser Use
+browser-use
+playwright
 
 # Data & Utilities
 httpx
