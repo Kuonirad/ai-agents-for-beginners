@@ -34,6 +34,11 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
   - **Learning Agents:** Improving performance over time.
   - **Multi-Agent Systems:** Collaboration between multiple agents.
 
+**When to Use AI Agents:**
+- **Open-Ended Problems:** Tasks where the steps cannot be hardcoded and require reasoning.
+- **Multi-Step Processes:** Complex workflows requiring tool use and intermediate steps.
+- **Improvement Over Time:** Scenarios where feedback can be used to refine future actions.
+
 ## 2. Agentic Frameworks
 **Goal:** Explore the tools available for building agents.
 
@@ -62,6 +67,14 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Function Calling:** The LLM selects a tool from a provided schema (JSON) and generates arguments. The code executes the function, and the result is returned to the LLM.
 - **Schema:** Defines tool name, description, and parameters. Critical for the LLM to understand *how* and *when* to use a tool.
 - **Use Cases:** Retrieving real-time data, performing calculations, executing code, interacting with APIs.
+
+**Building Blocks:**
+- **Function/Tool Schemas:** Definitions enabling the LLM to construct valid requests.
+- **Function Execution Logic:** Determines how and when tools are invoked (e.g., routing).
+- **Message Handling System:** Manages the flow between user, LLM, and tools.
+- **Tool Integration Framework:** Infrastructure connecting the agent to external tools.
+- **Error Handling & Validation:** Managing failures and validating parameters.
+- **State Management:** Tracking context and persistence across interactions.
 
 ## 5. Agentic RAG
 **Goal:** Advanced retrieval strategies beyond "Retrieval-Augmented Generation".
@@ -139,6 +152,7 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
   - **Client:** Connects to servers.
   - **Server:** Exposes Tools, Resources, and Prompts.
 - **A2A (Agent-to-Agent):** Protocol for communication between different agents across boundaries.
+  - **Components:** Agent Card (Metadata), Agent Executor (Context Handler), Artifact (Result), Event Queue (Async Msgs).
 - **NLWeb (Natural Language Web):** Exposing website functionality via natural language interfaces (embedding-based discovery).
 
 ## 12. Context Engineering
