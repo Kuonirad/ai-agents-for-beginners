@@ -171,8 +171,12 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 
 **Features:**
 - Builds on learnings from Semantic Kernel and AutoGen.
-- **Workflows:** Graph-based execution (Executors, Edges) for complex orchestration.
-- **Middleware:** Intercepting chat/function calls for logging (observability) or modification.
+- **Workflows:** Graph-based execution using **Executors** (agents or custom logic) connected by **Edges**:
+  - **Direct:** Simple sequence.
+  - **Conditional:** If/Else logic.
+  - **Switch-case:** Routing based on conditions.
+  - **Fan-out/Fan-in:** Parallel processing and aggregation.
+- **Middleware:** Intercepting chat/function calls for logging (observability), security checks, or modifying messages on the fly.
 - **Interoperability:** Supports A2A and MCP.
 - **Enterprise Ready:** Built-in Observability (OpenTelemetry), Security, and Durability (pause/resume).
 
