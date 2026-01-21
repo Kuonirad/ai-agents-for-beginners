@@ -58,9 +58,16 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 ## 4. Tool Use Design Pattern
 **Goal:** Enable agents to interact with the world via function calling.
 
+**Building Blocks:**
+- **Function/Tool Schemas:** Definitions of tools (name, description, parameters) so the LLM knows how to call them.
+- **Function Execution Logic:** How and when tools are invoked (planning, routing).
+- **Message Handling System:** Managing the flow between user inputs, LLM thoughts, and tool outputs.
+- **Tool Integration Framework:** Connecting the agent to external APIs and services.
+- **Error Handling & Validation:** Managing failures and validating tool parameters.
+- **State Management:** Tracking context and tool interactions across turns.
+
 **Key Concepts:**
-- **Function Calling:** The LLM selects a tool from a provided schema (JSON) and generates arguments. The code executes the function, and the result is returned to the LLM.
-- **Schema:** Defines tool name, description, and parameters. Critical for the LLM to understand *how* and *when* to use a tool.
+- **Function Calling:** The LLM selects a tool from a provided schema and generates arguments. The code executes the function, and the result is returned to the LLM.
 - **Use Cases:** Retrieving real-time data, performing calculations, executing code, interacting with APIs.
 
 ## 5. Agentic RAG
@@ -131,26 +138,49 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Cost Management:** Caching, using smaller models for simpler tasks, routing requests.
 
 ## 11. Agentic Protocols
-**Goal:** Standards for interoperability.
+**Goal:** Standards for interoperability between tools and agents.
 
-**Protocols:**
-- **MCP (Model Context Protocol):** Standardizes how LLMs connect to external data and tools.
-  - **Host:** The application (e.g., IDE).
+**1. MCP (Model Context Protocol):**
+- Standardizes connections between LLMs and external data/tools.
+- **Components:**
+  - **Host:** The application (e.g., IDE, Claude Desktop).
   - **Client:** Connects to servers.
-  - **Server:** Exposes Tools, Resources, and Prompts.
-- **A2A (Agent-to-Agent):** Protocol for communication between different agents across boundaries.
-- **NLWeb (Natural Language Web):** Exposing website functionality via natural language interfaces (embedding-based discovery).
+  - **Server:** Exposes **Tools** (functions), **Resources** (data/files), and **Prompts**.
+
+**2. A2A (Agent-to-Agent Protocol):**
+- Enables collaboration between agents across different organizations/stacks.
+- **Components:**
+  - **Agent Card:** Identity, description, skills, endpoint, and version.
+  - **Agent Executor:** Passes context to the remote agent.
+  - **Artifact:** The result of the agent's work (data + description).
+  - **Event Queue:** Handles async updates and long-running tasks.
+
+**3. NLWeb (Natural Language Web):**
+- Exposing website functionality via natural language interfaces.
+- **Components:**
+  - **NLWeb Application:** Processes natural language queries.
+  - **Embedding Models & Vector DB:** Semantic search over website content.
+  - **MCP Server:** Allows external agents to "ask" the website questions.
 
 ## 12. Context Engineering
-**Goal:** Managing the limited context window effectively.
+**Goal:** Managing the limited context window effectively for reliability.
 
-**VS Prompt Engineering:** Context engineering manages the dynamic flow of information (history, retrieved data), not just the static instruction.
+**Planning Strategies:**
+1. **Define Clear Results:** What should the world look like after the task?
+2. **Map the Context:** What info is needed and where is it?
+3. **Create Pipelines:** How does the agent get the info (RAG, Tools)?
 
-**Strategies:**
-- **Scratchpad:** Temporary storage for intermediate reasoning.
-- **Memory/Recall:** Retrieving relevant past info.
-- **Compression:** Summarizing history to save tokens.
-- **Pruning:** Removing irrelevant or conflicting info to avoid "Context Confusion" or "Context Poisoning".
+**Practical Strategies:**
+- **Scratchpad:** Temporary notes for the current session.
+- **Memories:** Persistent storage across sessions.
+- **Compression/Summarization:** Reducing token usage.
+- **Sandboxing:** Running code externally to save context.
+
+**Common Context Failures & Mitigations:**
+- **Context Poisoning (Hallucinations):** Validate info before adding to memory; quarantine bad data.
+- **Context Distraction (Too much history):** Summarize history periodically; reset focus.
+- **Context Confusion (Too many tools):** Use RAG to load only relevant tools (Tool Loadout Management).
+- **Context Clash (Conflicting info):** Prune outdated info; use scratchpads to reconcile conflicts.
 
 ## 13. Agent Memory
 **Goal:** Making agents stateful and capable of learning.
@@ -191,3 +221,8 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 - **Vision-Based Extraction:** Using the LLM to analyze screenshots of the page to extract structured data (e.g., prices, ratings) without relying on brittle CSS selectors.
 - **Structured Output:** Converting unstructured web content into typed objects (e.g., Pydantic models) for reliable downstream processing.
 - **CDP (Chrome DevTools Protocol):** A low-level protocol used to connect Playwright and Browser-Use to the same browser instance, enabling advanced debugging and persistent sessions.
+
+**Example Applications:**
+- **Ad-Use:** Generating ads by analyzing landing pages and creating content.
+- **Msg-Use:** Scheduling WhatsApp messages using natural language.
+- **News-Use:** Monitoring news sites and extracting/summarizing articles with sentiment analysis.
