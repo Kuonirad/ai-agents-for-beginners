@@ -3,6 +3,7 @@
 This guide provides a detailed summary of the "AI Agents for Beginners" course, covering key concepts, frameworks, design patterns, and practical implementations for building AI Agents.
 
 ## Table of Contents
+0. [Course Setup](#0-course-setup)
 1. [Introduction to AI Agents](#1-introduction-to-ai-agents)
 2. [Agentic Frameworks](#2-agentic-frameworks)
 3. [Agentic Design Patterns](#3-agentic-design-patterns)
@@ -20,6 +21,17 @@ This guide provides a detailed summary of the "AI Agents for Beginners" course, 
 15. [Browser Use](#15-browser-use)
 
 ---
+
+## 0. Course Setup
+**Goal:** Prepare the development environment for building AI Agents.
+
+**Key Requirements:**
+- **Python 3.12+**: Essential for running the latest agent frameworks.
+- **Environment Variables**: Managed via `.env` file (copied from `.env.example`).
+- **AI Models**:
+  - **GitHub Models:** Free tier for prototyping. Requires `GITHUB_TOKEN`.
+  - **Azure AI Foundry:** Production-grade models (GPT-4o, etc.). Requires Azure subscription and endpoints.
+- **Dependencies:** Installed via `pip install -r requirements.txt`.
 
 ## 1. Introduction to AI Agents
 **Goal:** Understand the fundamentals of AI Agents and their capabilities.
