@@ -21,7 +21,16 @@ semantic-kernel[mcp]
 # Model Context Protocol
 mcp[cli]
 
+# Agent Memory
+cognee[redis]
+mem0ai
+
+# Browser Automation
+browser-use
+playwright
+
 # OpenAI
+langchain-openai
 openai
 
 # Data & Utilities
