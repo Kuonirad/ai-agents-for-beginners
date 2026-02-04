@@ -33,3 +33,8 @@ pandas
 pillow
 python-dotenv
 uvicorn
+
+# Browser Use
+browser-use>=0.11.0
+langchain-openai
+playwright
