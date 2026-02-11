@@ -59,7 +59,8 @@ async def main():
         "Search for 'Stockholm, Sweden' in the search box. "
         "Wait for the search results page to fully load with listing cards visible. "
         "Extract ALL listings with their prices, ratings, and URLs. "
-        "Find the cheapest listing."
+        "Find the cheapest listing. "
+        "Return the final result as a structured JSON."
     )
 
     print(f"🚀 Starting Agent Task:\n{task}\n")
@@ -79,40 +80,16 @@ async def main():
         # Run the agent
         history = await agent.run()
 
-        # 4. Extract Structured Data
-        # We can use the agent's final result or explicitly ask for extraction
-        # Here we demonstrate using the extraction tool explicitly if needed,
-        # but the Agent's run loop typically handles the task.
-        # For this demo, we assume the agent returns the result in the final step or we can process the history.
-
+        # 4. Process Results
         print("\n✅ Task Completed!")
         print(f"Steps taken: {len(history.history)}")
 
-        # In a real extraction scenario with Browser-Use, you might want to call `agent.extract_content`
-        # specifically if the task implies purely data extraction, or inspect the final result.
-
-        # Let's try to perform a specific extraction pass on the final page
-        print("\n🔍 Performing final extraction pass...")
-        page = await browser.get_current_page()
-
-        extraction_prompt = """
-        Extract ALL Airbnb listings visible on this page.
-        Identify the cheapest listing.
-        """
-
-        result = await page.extract_content(
-            prompt=extraction_prompt,
-            structured_output=SearchResult,
-            llm=llm
-        )
-
-        print("\n📊 Extraction Results:")
-        print(f"Location: {result.location}")
-        print(f"Total Listings: {result.total_listings_found}")
-        print(f"Average Price: {result.average_price:.2f} {result.cheapest_listing.currency}")
-        print(f"Cheapest Listing: {result.cheapest_listing.title}")
-        print(f"Price: {result.cheapest_listing.price_per_night} {result.cheapest_listing.currency}")
-        print(f"URL: {result.cheapest_listing.url}")
+        # In a real scenario, we would parse the final result from the agent history
+        # Since we removed the invalid 'page.extract_content' call, we rely on the agent's output.
+        if history.history:
+            final_result = history.history[-1].result
+            print("\n📝 Final Result from Agent:")
+            print(final_result)
 
     except Exception as e:
         print(f"❌ Error: {str(e)}")
