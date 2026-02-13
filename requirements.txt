@@ -24,6 +24,11 @@ mcp[cli]
 # OpenAI
 openai
 
+# Browser Automation
+browser-use
+langchain-openai
+playwright
+
 # Data & Utilities
 httpx
 ipykernel
