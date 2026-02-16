@@ -1,0 +1,6 @@
+semantic-kernel
+semantic-kernel[azure]
+openai
+python-dotenv
+azure-ai-inference
+azure-identity
